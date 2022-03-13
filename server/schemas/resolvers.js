@@ -48,13 +48,27 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-
+        // Add and remove books potential bugs
         addBook: async (parent, { book }, context) => {
             if (context.user) {
                 const updatedBookList = await User.findOneAndUpdate(
                     { _id: context.user._id},
                     { $push: { savedBooks: book } },
                     { new: true }
+                );
+
+                return updatedBookList;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeBook: async (parent, { book }, context) => {
+            if (context.user) {
+                const updatedBookList = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: book } },
+                    { new: true}
                 );
 
                 return updatedBookList;
