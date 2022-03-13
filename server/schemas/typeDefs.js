@@ -10,7 +10,13 @@ const typeDefs = gql`
         bookCount: Int
     }
 
- 
+    type Query {
+        me: User
+        users(username: String!): User
+        savedBooks: [Book]
+    }
+
+
 `;
 
 module.exports = typeDefs;
