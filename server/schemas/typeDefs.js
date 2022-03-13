@@ -16,6 +16,14 @@ const typeDefs = gql`
         savedBooks: [Book]
     }
 
+    type Book {
+        bookId: String
+        authors: [String]
+        desctiption: String
+        image: String
+        link: String
+        title: String
+    }
 
 `;
 
