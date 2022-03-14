@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
 // Check me Query later || [String]
 const typeDefs = gql`
@@ -33,8 +33,8 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addBook(authors: [String!], description: String!, title: String!, bookId: String!, image: String!)
-        removeBook(authors: [String!], description: String!, title: String!, bookId: String!, image: String!)
+        addBook(authors: [String!], description: String!, title: String!, bookId: String!, image: String!): Auth
+        removeBook(authors: [String!], description: String!, title: String!, bookId: String!, image: String!): Auth
     }
 `;
 
