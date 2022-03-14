@@ -25,6 +25,8 @@ const SavedBooks = () => {
       await removeBook({
         variables: bookId,
       });
+
+      removeBookId(bookId);
     } catch (err) {
       console.error(err);
     }
