@@ -49,11 +49,11 @@ const resolvers = {
             return { token, user };
         },
         // Add and remove books potential bugs
-        addBook: async (parent, { book }, context) => {
+        saveBook: async (parent, { newBook }, context) => {
             if (context.user) {
                 const updatedBookList = await User.findOneAndUpdate(
                     { _id: context.user._id},
-                    { $push: { savedBooks: book } },
+                    { $push: { savedBooks: bookId } },
                     { new: true }
                 );
 
