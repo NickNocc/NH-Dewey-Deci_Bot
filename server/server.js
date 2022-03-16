@@ -13,7 +13,7 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     // context: authMiddleware,
-  });
+  })
   await server.start();
   server.applyMiddleware({ app });
   console.log(`GraphQL @ http://localhost:${PORT}${server.graphqlPath}`);
@@ -21,7 +21,7 @@ const startServer = async () => {
 
 startServer()
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
  // if we're in production, serve client/build as static assets

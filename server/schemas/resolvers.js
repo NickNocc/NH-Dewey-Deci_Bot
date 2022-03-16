@@ -44,9 +44,11 @@ const resolvers = {
         },
         // Add and remove books potential bugs
         saveBook: async (parent, { bookId }, context) => {
-            if (context.user) {
+
+            // console.log("saveBook: " + token);
+            if (context) {
                 const updatedBookList = await User.findOneAndUpdate(
-                    { _id: context.user._id},
+                    { _id: context.user},
                     { $push: { savedBooks: bookId } },
                     { new: true }
                 );
@@ -58,9 +60,10 @@ const resolvers = {
         },
 
         removeBook: async (parent, { book }, context) => {
+        
             if (context.user) {
                 const updatedBookList = await User.findOneAndUpdate(
-                    { _id: context.user._id },
+                    { _id: context.username },
                     { $pull: { savedBooks: book } },
                     { new: true}
                 );
