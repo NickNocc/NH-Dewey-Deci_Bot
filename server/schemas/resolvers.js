@@ -5,7 +5,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
     Query: {
         me: async(parent, args, context) => {
-            if(context.user) {
+            if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate('savedBooks')
@@ -15,12 +15,6 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
-        
-        // findUser: async () => {
-        //     User.find()
-        //         .select('-__v -password')
-        //         .populate('savedBooks')
-        // }
 
     },
 
