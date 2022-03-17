@@ -43,15 +43,18 @@ const resolvers = {
             return { token, user };
         },
         // Add and remove books potential bugs
-        saveBook: async (parent, { bookId }, context) => {
+        saveBook: async (parent, args, context) => {
 
-            // console.log("saveBook: " + token);
+            // data is being revieved, but not written to database
             if (context) {
-                const updatedBookList = await User.findOneAndUpdate(
-                    { _id: context.user},
-                    { $push: { savedBooks: bookId } },
+                console.log("savedBook: " + args.savedBook);
+                const updatedBookList = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { savedBooks: { _id: args.savedBook} } },
                     { new: true }
                 );
+
+                console.log("updated book list: " + updatedBookList);
 
                 return updatedBookList;
             }
@@ -64,9 +67,10 @@ const resolvers = {
             if (context.user) {
                 const updatedBookList = await User.findOneAndUpdate(
                     { _id: context.username },
-                    { $pull: { savedBooks: book } },
+                    { $push: { savedBooks: book } },
                     { new: true}
                 );
+                console.log(updatedBookList);
 
                 return updatedBookList;
             }
