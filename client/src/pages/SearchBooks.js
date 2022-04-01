@@ -145,5 +145,5 @@ const SearchBooks = () => {
     </>
   );
 };
-gigachad
+gig
 export default SearchBooks;
